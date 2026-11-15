@@ -407,6 +407,9 @@
     if (isTransitioning || dragState.dragging) {
       return;
     }
+    if (Cezeri.audio) {
+      Cezeri.audio.stop();
+    }
     var walls = (Cezeri.data && Cezeri.data.walls) || [];
     if (walls.length <= 1) {
       return;
@@ -718,6 +721,7 @@
     goToWall: goToWall,
     nextWall: nextWall,
     prevWall: prevWall,
+    getActiveIndex: function () { return activeIndex; },
     isTransitioning: function () { return isTransitioning || dragState.dragging; },
     getActiveWall: function () {
       var walls = (Cezeri.data && Cezeri.data.walls) || [];

@@ -30,12 +30,21 @@
     var introTitle = document.getElementById("intro-title");
     var introMission = document.getElementById("intro-mission");
     var startBtn = document.getElementById("intro-start-btn");
+    var introAudioBtn = document.getElementById("intro-audio-btn");
 
     if (introTitle && Cezeri.data) {
       introTitle.textContent = Cezeri.data.title;
     }
     if (introMission && Cezeri.data) {
       introMission.textContent = Cezeri.data.introMission;
+    }
+
+    if (introAudioBtn) {
+      introAudioBtn.addEventListener("click", function () {
+        if (Cezeri.audio) {
+          Cezeri.audio.toggle("audio/giris.wav", introAudioBtn);
+        }
+      });
     }
 
     // ?edit=1 modunda doğrudan sahneye gir
@@ -54,6 +63,9 @@
 
     if (startBtn && introOverlay) {
       startBtn.addEventListener("click", function () {
+        if (Cezeri.audio) {
+          Cezeri.audio.stop();
+        }
         introOverlay.hidden = true;
         introOverlay.setAttribute("aria-hidden", "true");
         Cezeri.state.setStarted(true);
@@ -77,9 +89,21 @@
     var closeBtn = document.getElementById("end-close-btn");
     var continueBtn = document.getElementById("hud-continue-btn");
     var introOverlay = document.getElementById("intro-overlay");
+    var endAudioBtn = document.getElementById("end-audio-btn");
+
+    if (endAudioBtn) {
+      endAudioBtn.addEventListener("click", function () {
+        if (Cezeri.audio) {
+          Cezeri.audio.toggle("audio/tebrik.wav", endAudioBtn);
+        }
+      });
+    }
 
     if (restartBtn) {
       restartBtn.addEventListener("click", function () {
+        if (Cezeri.audio) {
+          Cezeri.audio.stop();
+        }
         if (endOverlay) {
           endOverlay.hidden = true;
           endOverlay.setAttribute("aria-hidden", "true");
@@ -103,6 +127,9 @@
 
     if (closeBtn && endOverlay) {
       closeBtn.addEventListener("click", function () {
+        if (Cezeri.audio) {
+          Cezeri.audio.stop();
+        }
         endOverlay.hidden = true;
         endOverlay.setAttribute("aria-hidden", "true");
       });
@@ -112,6 +139,9 @@
       continueBtn.addEventListener("click", function () {
         endOverlay.hidden = false;
         endOverlay.setAttribute("aria-hidden", "false");
+        if (Cezeri.audio) {
+          Cezeri.audio.play("audio/tebrik.wav", endAudioBtn);
+        }
       });
     }
   }
@@ -158,6 +188,10 @@
           if (endOverlay) {
             endOverlay.hidden = false;
             endOverlay.setAttribute("aria-hidden", "false");
+            var endAudioBtn = document.getElementById("end-audio-btn");
+            if (Cezeri.audio) {
+              Cezeri.audio.play("audio/tebrik.wav", endAudioBtn);
+            }
           }
         }
       });

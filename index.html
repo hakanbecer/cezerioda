@@ -72,9 +72,15 @@
             <span class="intro-hint-icon">↔</span>
             <span>Odayı gezmek için ekranı kaydırın veya yön oklarını kullanın</span>
           </div>
-          <button id="intro-start-btn" type="button" class="btn-primary intro-start-btn">
-            Başla ▶
-          </button>
+          <div class="intro-actions">
+            <button id="intro-audio-btn" type="button" class="btn-intro-audio" aria-label="Sesli dinle" data-label-play="Sesli Dinle" data-label-stop="Durdur">
+              <span class="audio-btn-icon" aria-hidden="true">🔊</span>
+              <span class="audio-btn-label">Sesli Dinle</span>
+            </button>
+            <button id="intro-start-btn" type="button" class="btn-primary intro-start-btn">
+              Başla ▶
+            </button>
+          </div>
         </div>
       </section>
 
@@ -97,15 +103,28 @@
               <span class="card-badge">Keşfedilen Nesne</span>
               <h2 id="card-title" class="card-title">Nesne Adı</h2>
             </div>
-            <button
-              id="card-close-btn"
-              type="button"
-              class="card-close-btn"
-              aria-label="Kartı kapat"
-            >
-              <span aria-hidden="true">✕</span>
-              <span class="card-close-text">Kapat</span>
-            </button>
+            <div class="card-header-actions">
+              <button
+                id="card-audio-btn"
+                type="button"
+                class="btn-card-audio"
+                aria-label="Sesli dinle"
+                data-label-play="Dinle"
+                data-label-stop="Durdur"
+              >
+                <span class="audio-btn-icon" aria-hidden="true">🔊</span>
+                <span class="audio-btn-label">Dinle</span>
+              </button>
+              <button
+                id="card-close-btn"
+                type="button"
+                class="card-close-btn"
+                aria-label="Kartı kapat"
+              >
+                <span aria-hidden="true">✕</span>
+                <span class="card-close-text">Kapat</span>
+              </button>
+            </div>
           </div>
 
           <div class="card-body">
@@ -141,6 +160,19 @@
           <p id="end-subtitle" class="end-subtitle">
             Odadaki 10 nesnenin tamamını ve açıklamalarını başarıyla incelediniz.
           </p>
+          <div class="end-audio-wrap">
+            <button
+              id="end-audio-btn"
+              type="button"
+              class="btn-end-audio"
+              aria-label="Tebrik mesajını dinle"
+              data-label-play="Tebrik Mesajını Dinle"
+              data-label-stop="Durdur"
+            >
+              <span class="audio-btn-icon" aria-hidden="true">🔊</span>
+              <span class="audio-btn-label">Tebrik Mesajını Dinle</span>
+            </button>
+          </div>
           <div class="end-footer">
             <button id="end-restart-btn" type="button" class="btn-primary">Başa Dön ↺</button>
             <button id="end-close-btn" type="button" class="btn-secondary">Odayı Gezmeye Devam Et</button>
@@ -208,6 +240,7 @@
   <script src="js/data.js"></script>
   <script src="js/scorm.js"></script>
   <script src="js/state.js"></script>
+  <script src="js/audio.js"></script>
   <script src="js/hotspots.js"></script>
   <script src="js/card.js"></script>
   <script src="js/scene.js"></script>

@@ -616,6 +616,54 @@ body.is-edit-mode .hotspot-btn.is-editor-selected {
   outline-offset: 2px;
 }
 
+.intro-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-intro-audio,
+.btn-end-audio {
+  min-width: 148px;
+  min-height: 48px;
+  padding: 10px 22px;
+  border-radius: 12px;
+  border: 2px solid #b8935c;
+  background: #eddcc1;
+  color: #4a2f13;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 160ms ease;
+}
+
+.btn-intro-audio:hover,
+.btn-end-audio:hover {
+  background: #e2ceae;
+  border-color: #9f5a1b;
+  color: #2b1806;
+}
+
+.btn-intro-audio.is-playing,
+.btn-end-audio.is-playing {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  animation: audio-pulse 1.5s ease-in-out infinite alternate;
+}
+
+.end-audio-wrap {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 /* --------------------------------------------------------------------------
    Bilgi Kartı Modalı (card.js)
    -------------------------------------------------------------------------- */
@@ -667,6 +715,43 @@ body.is-edit-mode .hotspot-btn.is-editor-selected {
   margin: 0;
   font-size: clamp(20px, calc(24px * var(--stage-scale)), 26px);
   color: #23160d;
+}
+
+.card-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-card-audio {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+
+.btn-card-audio:hover {
+  background: #dbeafe;
+  border-color: #1d4ed8;
+}
+
+.btn-card-audio.is-playing {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #b91c1c;
+  animation: audio-pulse 1.5s ease-in-out infinite alternate;
 }
 
 .card-close-btn {

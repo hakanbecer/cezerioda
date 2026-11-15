@@ -25,6 +25,7 @@
       <file href="js/data.js"/>
       <file href="js/scorm.js"/>
       <file href="js/state.js"/>
+      <file href="js/audio.js"/>
       <file href="js/hotspots.js"/>
       <file href="js/card.js"/>
       <file href="js/scene.js"/>
@@ -44,6 +45,18 @@
       <file href="assets/img/nesne-su-carki.webp"/>
       <file href="assets/img/nesne-gaz-lambasi.webp"/>
       <file href="assets/img/nesne-kitaplar.webp"/>
+      <file href="audio/giris.wav"/>
+      <file href="audio/nesne_1.wav"/>
+      <file href="audio/nesne_2.wav"/>
+      <file href="audio/nesne_3.wav"/>
+      <file href="audio/nesne_4.wav"/>
+      <file href="audio/nesne_5.wav"/>
+      <file href="audio/nesne_6.wav"/>
+      <file href="audio/nesne_7.wav"/>
+      <file href="audio/nesne_8.wav"/>
+      <file href="audio/nesne_9.wav"/>
+      <file href="audio/nesne_10.wav"/>
+      <file href="audio/tebrik.wav"/>
     </resource>
   </resources>
 </manifest>

@@ -11,6 +11,7 @@
   var thumbPlaceholderEl = null;
   var panelTextEl = null;
   var closeBtn = null;
+  var audioBtn = null;
 
   var currentObject = null;
   var lastTriggerEl = null;
@@ -51,6 +52,9 @@
     if (!obj || !overlayEl) {
       return;
     }
+    if (Cezeri.audio) {
+      Cezeri.audio.stop();
+    }
     currentObject = obj;
     lastTriggerEl = triggerEl || document.activeElement;
     openFlag = true;
@@ -58,6 +62,10 @@
     titleEl.textContent = obj.name;
     updateThumbnail(obj);
     renderCardContent();
+
+    if (Cezeri.audio && audioBtn) {
+      Cezeri.audio.resetButton(audioBtn);
+    }
 
     overlayEl.hidden = false;
     overlayEl.setAttribute("aria-hidden", "false");
@@ -69,6 +77,9 @@
   function close() {
     if (!openFlag || !overlayEl) {
       return;
+    }
+    if (Cezeri.audio) {
+      Cezeri.audio.stop();
     }
     openFlag = false;
     overlayEl.hidden = true;
@@ -98,6 +109,7 @@
     thumbPlaceholderEl = document.getElementById("card-thumb-placeholder");
     panelTextEl = document.getElementById("card-panel-text");
     closeBtn = document.getElementById("card-close-btn");
+    audioBtn = document.getElementById("card-audio-btn");
 
     if (!overlayEl || !dialogEl) {
       return;
@@ -105,6 +117,18 @@
 
     if (closeBtn) {
       closeBtn.addEventListener("click", close);
+    }
+
+    if (audioBtn) {
+      audioBtn.addEventListener("click", function () {
+        if (!currentObject) {
+          return;
+        }
+        var audioSrc = "audio/nesne_" + currentObject.order + ".wav";
+        if (Cezeri.audio) {
+          Cezeri.audio.toggle(audioSrc, audioBtn);
+        }
+      });
     }
 
     overlayEl.addEventListener("click", function (event) {
