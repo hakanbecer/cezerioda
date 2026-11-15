@@ -16,40 +16,13 @@
 
     if (continueBtn) {
       var isEdit = Cezeri.editor && Cezeri.editor.isActive();
-      var st = Cezeri.state.get();
       if (!isEdit && found >= total) {
         continueBtn.hidden = false;
-        if (!st.activityDone) {
-          continueBtn.textContent = "Eşleştirmeye Geç";
-        } else if (!st.quizDone) {
-          continueBtn.textContent = "Değerlendirmeye Geç";
-        } else {
-          continueBtn.textContent = "Sonucu Gör";
-        }
+        continueBtn.textContent = "Tebrikler 🏆";
       } else {
         continueBtn.hidden = true;
       }
     }
-  }
-
-  function setupContinueButton() {
-    var continueBtn = document.getElementById("hud-continue-btn");
-    if (!continueBtn) {
-      return;
-    }
-    continueBtn.addEventListener("click", function () {
-      if (!Cezeri.state) {
-        return;
-      }
-      var st = Cezeri.state.get();
-      if (!st.activityDone && Cezeri.activity) {
-        Cezeri.activity.start();
-      } else if (!st.quizDone && Cezeri.quiz) {
-        Cezeri.quiz.start();
-      } else if (Cezeri.quiz) {
-        Cezeri.quiz.showEndScreen();
-      }
-    });
   }
 
   function setupIntroOverlay() {
@@ -76,7 +49,7 @@
     }
 
     if (startBtn && Cezeri.state && Cezeri.state.getFoundCount() > 0) {
-      startBtn.textContent = "Devam Et";
+      startBtn.textContent = "Devam Et ▶";
     }
 
     if (startBtn && introOverlay) {
@@ -98,6 +71,51 @@
     }
   }
 
+  function setupEndOverlay() {
+    var endOverlay = document.getElementById("end-overlay");
+    var restartBtn = document.getElementById("end-restart-btn");
+    var closeBtn = document.getElementById("end-close-btn");
+    var continueBtn = document.getElementById("hud-continue-btn");
+    var introOverlay = document.getElementById("intro-overlay");
+
+    if (restartBtn) {
+      restartBtn.addEventListener("click", function () {
+        if (endOverlay) {
+          endOverlay.hidden = true;
+          endOverlay.setAttribute("aria-hidden", "true");
+        }
+        if (Cezeri.state) {
+          Cezeri.state.reset();
+        }
+        if (Cezeri.scene) {
+          Cezeri.scene.goToWall(0, -1);
+        }
+        if (introOverlay) {
+          introOverlay.hidden = false;
+          introOverlay.setAttribute("aria-hidden", "false");
+          var startBtn = document.getElementById("intro-start-btn");
+          if (startBtn) {
+            startBtn.textContent = "Başla ▶";
+          }
+        }
+      });
+    }
+
+    if (closeBtn && endOverlay) {
+      closeBtn.addEventListener("click", function () {
+        endOverlay.hidden = true;
+        endOverlay.setAttribute("aria-hidden", "true");
+      });
+    }
+
+    if (continueBtn && endOverlay) {
+      continueBtn.addEventListener("click", function () {
+        endOverlay.hidden = false;
+        endOverlay.setAttribute("aria-hidden", "false");
+      });
+    }
+  }
+
   function setupDisclaimer() {
     var disclaimerEl = document.getElementById("disclaimer-bar");
     if (disclaimerEl && Cezeri.data && Cezeri.data.disclaimer) {
@@ -115,8 +133,7 @@
         if (
           eventType === "objectFound" ||
           eventType === "restored" ||
-          eventType === "activityCompleted" ||
-          eventType === "quizCompleted"
+          eventType === "reset"
         ) {
           updateCounterDisplay();
         }
@@ -132,13 +149,16 @@
       Cezeri.card.init();
       Cezeri.card.setOnClose(function () {
         var isEdit = Cezeri.editor && Cezeri.editor.isActive();
-        if (isEdit || !Cezeri.state || !Cezeri.activity) {
+        if (isEdit || !Cezeri.state) {
           return;
         }
         var foundAll = Cezeri.state.getFoundCount() >= Cezeri.state.getTotalCount();
-        var st = Cezeri.state.get();
-        if (foundAll && !st.activityDone) {
-          Cezeri.activity.start();
+        if (foundAll) {
+          var endOverlay = document.getElementById("end-overlay");
+          if (endOverlay) {
+            endOverlay.hidden = false;
+            endOverlay.setAttribute("aria-hidden", "false");
+          }
         }
       });
     }
@@ -148,14 +168,8 @@
     if (Cezeri.editor) {
       Cezeri.editor.init();
     }
-    if (Cezeri.activity) {
-      Cezeri.activity.init();
-    }
-    if (Cezeri.quiz) {
-      Cezeri.quiz.init();
-    }
 
-    setupContinueButton();
+    setupEndOverlay();
     updateCounterDisplay();
     setupIntroOverlay();
   }

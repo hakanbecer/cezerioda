@@ -9,33 +9,19 @@
   var thumbBoxEl = null;
   var thumbImgEl = null;
   var thumbPlaceholderEl = null;
-  var tabDonemBtn = null;
-  var tabBugunBtn = null;
-  var panelHeadingEl = null;
   var panelTextEl = null;
-  var panelEl = null;
   var closeBtn = null;
 
   var currentObject = null;
-  var activeTab = "donem";
   var lastTriggerEl = null;
   var openFlag = false;
   var onCloseHandler = null;
 
-  function renderTabContent() {
-    if (!currentObject || !currentObject.tabs) {
+  function renderCardContent() {
+    if (!currentObject || !panelTextEl) {
       return;
     }
-    var tabData = currentObject.tabs[activeTab] || { heading: "", text: "" };
-    panelHeadingEl.textContent = tabData.heading || "";
-    panelTextEl.textContent = tabData.text || "";
-
-    var isDonem = activeTab === "donem";
-    tabDonemBtn.setAttribute("aria-selected", isDonem ? "true" : "false");
-    tabDonemBtn.classList.toggle("is-active", isDonem);
-    tabBugunBtn.setAttribute("aria-selected", isDonem ? "false" : "true");
-    tabBugunBtn.classList.toggle("is-active", !isDonem);
-    panelEl.setAttribute("aria-labelledby", isDonem ? "tab-donem" : "tab-bugun");
+    panelTextEl.textContent = currentObject.description || "";
   }
 
   function updateThumbnail(obj) {
@@ -67,12 +53,11 @@
     }
     currentObject = obj;
     lastTriggerEl = triggerEl || document.activeElement;
-    activeTab = "donem";
     openFlag = true;
 
     titleEl.textContent = obj.name;
     updateThumbnail(obj);
-    renderTabContent();
+    renderCardContent();
 
     overlayEl.hidden = false;
     overlayEl.setAttribute("aria-hidden", "false");
@@ -104,14 +89,6 @@
     }
   }
 
-  function switchTab(tabKey) {
-    if (tabKey !== "donem" && tabKey !== "bugun") {
-      return;
-    }
-    activeTab = tabKey;
-    renderTabContent();
-  }
-
   function init() {
     overlayEl = document.getElementById("card-overlay");
     dialogEl = document.getElementById("card-dialog");
@@ -119,10 +96,6 @@
     thumbBoxEl = document.getElementById("card-thumb");
     thumbImgEl = document.getElementById("card-thumb-img");
     thumbPlaceholderEl = document.getElementById("card-thumb-placeholder");
-    tabDonemBtn = document.getElementById("tab-donem");
-    tabBugunBtn = document.getElementById("tab-bugun");
-    panelEl = document.getElementById("card-tabpanel");
-    panelHeadingEl = document.getElementById("card-panel-heading");
     panelTextEl = document.getElementById("card-panel-text");
     closeBtn = document.getElementById("card-close-btn");
 
@@ -130,40 +103,19 @@
       return;
     }
 
-    tabDonemBtn.addEventListener("click", function () {
-      switchTab("donem");
-    });
+    if (closeBtn) {
+      closeBtn.addEventListener("click", close);
+    }
 
-    tabBugunBtn.addEventListener("click", function () {
-      switchTab("bugun");
-    });
-
-    // Sekmelerde ok tuşları ile geçiş desteği
-    var handleTabKeys = function (e) {
-      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-        e.preventDefault();
-        var nextTab = activeTab === "donem" ? "bugun" : "donem";
-        switchTab(nextTab);
-        (nextTab === "donem" ? tabDonemBtn : tabBugunBtn).focus();
-      }
-    };
-    tabDonemBtn.addEventListener("keydown", handleTabKeys);
-    tabBugunBtn.addEventListener("keydown", handleTabKeys);
-
-    closeBtn.addEventListener("click", close);
-
-    overlayEl.addEventListener("click", function (e) {
-      if (e.target === overlayEl) {
+    overlayEl.addEventListener("click", function (event) {
+      if (event.target === overlayEl) {
         close();
       }
     });
 
-    document.addEventListener("keydown", function (e) {
-      if (!openFlag) {
-        return;
-      }
-      if (e.key === "Escape") {
-        e.preventDefault();
+    dialogEl.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        event.stopPropagation();
         close();
       }
     });
@@ -173,7 +125,14 @@
     init: init,
     open: open,
     close: close,
-    isOpen: function () { return openFlag; },
-    setOnClose: function (fn) { onCloseHandler = fn; }
+    isOpen: function () {
+      return openFlag;
+    },
+    getCurrentObject: function () {
+      return currentObject;
+    },
+    setOnClose: function (fn) {
+      onCloseHandler = fn;
+    }
   };
 })(window);

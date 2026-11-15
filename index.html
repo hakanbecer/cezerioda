@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Cezeri’nin Çocukluk Odası</title>
+  <title>Bilim İnsanının Çocukluğu</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div id="app-viewport" class="app-viewport">
-    <main id="stage" class="stage" aria-label="Cezeri’nin Çocukluk Odası Etkileşimli Sahne">
+    <main id="stage" class="stage" aria-label="Bilim İnsanının Çocukluğu Etkileşimli Sahne">
       <!-- Duvar katmanları (scene.js tarafından doldurulur) -->
       <div id="wall-viewport" class="wall-viewport" aria-live="polite"></div>
 
@@ -22,7 +23,7 @@
           <button id="hud-continue-btn" type="button" class="hud-continue-btn" hidden>
             Eşleştirmeye Geç
           </button>
-          <div id="hud-counter" class="hud-pill hud-counter" aria-live="polite">Bulunan: 0/9</div>
+          <div id="hud-counter" class="hud-pill hud-counter" aria-live="polite">Bulunan: 0/10</div>
         </div>
       </header>
 
@@ -63,12 +64,16 @@
       >
         <div class="intro-card">
           <span class="intro-kicker">Etkileşimli Tarih ve Bilim Keşfi</span>
-          <h1 id="intro-title" class="intro-title">Cezeri’nin Çocukluk Odası</h1>
+          <h1 id="intro-title" class="intro-title">Bilim İnsanının Çocukluğu</h1>
           <p id="intro-mission" class="intro-mission">
-            Odanın duvarlarını gezerek Cezeri’nin çocukluk yıllarına ait 9 eşyayı bul ve günümüzdeki karşılıklarını keşfet.
+            Merhaba sevgili öğrenciler! Bu etkinlikte bir bilim insanının çocukluğuna yolculuk yapacağız. Odayı gezmek için ekranı parmağınızla ya da farenizle sağa-sola kaydırabilir veya yanlardaki yön oklarını (❮ ❯) kullanabilirsiniz. Merak ettiğiniz nesnelerin numaralarına tıklayarak açıklamalarını inceleyiniz.
           </p>
+          <div class="intro-nav-hint">
+            <span class="intro-hint-icon">↔</span>
+            <span>Odayı gezmek için ekranı kaydırın veya yön oklarını kullanın</span>
+          </div>
           <button id="intro-start-btn" type="button" class="btn-primary intro-start-btn">
-            Başla
+            Başla ▶
           </button>
         </div>
       </section>
@@ -110,36 +115,7 @@
             </div>
 
             <div class="card-content">
-              <div class="card-tabs" role="tablist" aria-label="Nesne bilgi sekmeleri">
-                <button
-                  id="tab-donem"
-                  type="button"
-                  role="tab"
-                  class="card-tab is-active"
-                  aria-selected="true"
-                  aria-controls="card-tabpanel"
-                >
-                  Dönem
-                </button>
-                <button
-                  id="tab-bugun"
-                  type="button"
-                  role="tab"
-                  class="card-tab"
-                  aria-selected="false"
-                  aria-controls="card-tabpanel"
-                >
-                  Bugün
-                </button>
-              </div>
-
-              <div
-                id="card-tabpanel"
-                class="card-tabpanel"
-                role="tabpanel"
-                aria-labelledby="tab-donem"
-              >
-                <h3 id="card-panel-heading" class="card-panel-heading"></h3>
+              <div id="card-tabpanel" class="card-tabpanel" role="region" aria-labelledby="card-title">
                 <p id="card-panel-text" class="card-panel-text"></p>
               </div>
             </div>
@@ -147,86 +123,7 @@
         </div>
       </div>
 
-      <!-- Eşleştirme etkinliği modalı (activity.js) -->
-      <div
-        id="activity-overlay"
-        class="modal-backdrop"
-        hidden
-        aria-hidden="true"
-      >
-        <div
-          class="activity-dialog"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="activity-title"
-        >
-          <div class="activity-header">
-            <div>
-              <h2 id="activity-title" class="activity-title">Eşleştirme Etkinliği</h2>
-              <p class="activity-subtitle">Soldaki eski aleti sağdaki günümüz karşılığına sürükleyip bırak (veya seçip dokun).</p>
-            </div>
-            <div class="activity-header-actions">
-              <span id="activity-progress" class="activity-progress">Eşleşen: 0/5</span>
-              <button id="activity-back-btn" type="button" class="btn-secondary-sm">Odaya Dön</button>
-            </div>
-          </div>
-
-          <div id="activity-feedback" class="activity-feedback" aria-live="polite">
-            Eski aletleri günümüz karşılıklarıyla eşleştir.
-          </div>
-
-          <div class="activity-board">
-            <div class="activity-column">
-              <div class="activity-col-heading">Eski Alet</div>
-              <div id="activity-source-list" class="activity-list"></div>
-            </div>
-            <div class="activity-column">
-              <div class="activity-col-heading">Günümüz Karşılığı</div>
-              <div id="activity-target-list" class="activity-list"></div>
-            </div>
-          </div>
-
-          <div class="activity-footer">
-            <button id="activity-next-btn" type="button" class="btn-primary" disabled>
-              Değerlendirmeye Geç
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kapanış değerlendirmesi modalı (quiz.js) -->
-      <div
-        id="quiz-overlay"
-        class="modal-backdrop"
-        hidden
-        aria-hidden="true"
-      >
-        <div
-          class="quiz-dialog"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="quiz-title"
-        >
-          <div class="quiz-header">
-            <h2 id="quiz-title" class="quiz-title">Kapanış Değerlendirmesi</h2>
-            <span id="quiz-progress" class="activity-progress">Soru 1 / 3</span>
-          </div>
-
-          <p id="quiz-question" class="quiz-question"></p>
-
-          <div id="quiz-options" class="quiz-options" role="group" aria-label="Cevap seçenekleri"></div>
-
-          <div id="quiz-feedback" class="quiz-feedback" hidden aria-live="polite"></div>
-
-          <div class="quiz-footer">
-            <button id="quiz-next-btn" type="button" class="btn-primary" disabled>
-              Sonraki Soru
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bitiş ekranı modalı (quiz.js) -->
+      <!-- Bitiş tebrik modalı -->
       <div
         id="end-overlay"
         class="modal-backdrop"
@@ -239,27 +136,14 @@
           aria-modal="true"
           aria-labelledby="end-title"
         >
-          <span class="intro-kicker">Etkinlik Tamamlandı</span>
-          <h2 id="end-title" class="end-title">Tebrikler!</h2>
-          <p class="end-subtitle">Cezeri’nin çocukluk odasını ve düzenek mirasını başarıyla keşfettin.</p>
-
-          <div class="end-stats">
-            <div class="end-stat-box">
-              <span class="end-stat-label">Bulunan Nesne</span>
-              <strong id="end-found-value" class="end-stat-value">9 / 9</strong>
-            </div>
-            <div class="end-stat-box">
-              <span class="end-stat-label">Doğru Sayısı</span>
-              <strong id="end-correct-value" class="end-stat-value">0 / 3</strong>
-            </div>
-            <div class="end-stat-box">
-              <span class="end-stat-label">Başarı Puanı</span>
-              <strong id="end-score-value" class="end-stat-value">%0</strong>
-            </div>
-          </div>
-
+          <span class="intro-kicker">Harika İş Çıkardın</span>
+          <h2 id="end-title" class="end-title">Tebrikler! 🎉</h2>
+          <p id="end-subtitle" class="end-subtitle">
+            Odadaki 10 nesnenin tamamını ve açıklamalarını başarıyla incelediniz.
+          </p>
           <div class="end-footer">
-            <button id="end-return-btn" type="button" class="btn-primary">Odaya Dön</button>
+            <button id="end-restart-btn" type="button" class="btn-primary">Başa Dön ↺</button>
+            <button id="end-close-btn" type="button" class="btn-secondary">Odayı Gezmeye Devam Et</button>
           </div>
         </div>
       </div>
@@ -315,7 +199,7 @@
 
       <!-- Her zaman görünür tarihsel canlandırma uyarısı -->
       <div id="disclaimer-bar" class="disclaimer-bar" role="note">
-        Canlandırma: Cezeri’nin çocukluk odası kaynaklarda belgelenmemiştir, tahmine dayalı bir yeniden kurgudur.
+        Canlandırma: Bir bilim insanının çocukluk odası ve aletleri, dönemin bilimsel mirasına dayalı bir canlandırmadır.
       </div>
     </main>
   </div>
@@ -327,8 +211,6 @@
   <script src="js/hotspots.js"></script>
   <script src="js/card.js"></script>
   <script src="js/scene.js"></script>
-  <script src="js/activity.js"></script>
-  <script src="js/quiz.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/main.js"></script>
 </body>

@@ -127,9 +127,22 @@
       return false;
     }
     state.foundIds.push(objectId);
+    if (state.foundIds.length >= getTotalCount()) {
+      state.score = 100;
+    }
     persist();
+    checkAndCompleteScorm();
     notify("objectFound", { objectId: objectId });
     return true;
+  }
+
+  function reset() {
+    state.foundIds = [];
+    state.currentWallIndex = 0;
+    state.started = false;
+    state.score = 0;
+    persist();
+    notify("reset");
   }
 
   function completeActivity() {
@@ -165,15 +178,12 @@
   }
 
   function isEverythingCompleted() {
-    return (
-      state.foundIds.length >= getTotalCount() &&
-      state.activityDone &&
-      state.quizDone
-    );
+    return state.foundIds.length >= getTotalCount();
   }
 
   function checkAndCompleteScorm() {
     if (isEverythingCompleted() && Cezeri.scorm) {
+      Cezeri.scorm.setScore(100);
       Cezeri.scorm.setLessonStatus("completed");
     }
   }
@@ -187,12 +197,11 @@
     },
     restoreFromScorm: restoreFromScorm,
     persist: persist,
+    reset: reset,
     setStarted: setStarted,
     setWallIndex: setWallIndex,
     isFound: isFound,
     markFound: markFound,
-    completeActivity: completeActivity,
-    completeQuiz: completeQuiz,
     getFoundCount: function () { return state.foundIds.length; },
     getTotalCount: getTotalCount,
     setScore: setScore,

@@ -41,7 +41,7 @@
 
     var coreEl = btn.querySelector(".hotspot-core");
     if (coreEl) {
-      coreEl.textContent = found ? "✓" : "";
+      coreEl.textContent = found ? "✓" : (obj.order != null ? String(obj.order) : "");
     }
   }
 
@@ -135,7 +135,7 @@
   function init() {
     if (Cezeri.state) {
       Cezeri.state.subscribe(function (eventType) {
-        if (eventType === "objectFound" || eventType === "restored") {
+        if (eventType === "objectFound" || eventType === "restored" || eventType === "reset") {
           refreshAllStates();
         }
       });

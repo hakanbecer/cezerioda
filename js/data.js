@@ -4,327 +4,173 @@
   var Cezeri = global.Cezeri = global.Cezeri || {};
 
   /*
-   * VERİ DOSYASI (2. AŞAMA TAM SÜRÜM)
-   * 4 duvar, 9 nesne, kart içerikleri, eşleştirme çiftleri ve değerlendirme soruları.
-   * Kart metinleri ve sorular yer tutucudur; doğrudan bu dosyadan düzenlenebilir.
+   * VERİ DOSYASI — 4 DUVAR, 10 NESNE
+   * 4.6.2 Dijital Kaynak pedagojik içerikleri ile birebir uyumludur.
    */
   Cezeri.data = {
-    title: "Cezeri’nin Çocukluk Odası",
-    introMission: "Odanın dört duvarını gezerek Cezeri’nin çocukluk yıllarına ait 9 eşyayı bul, ardından eşleştirme ve kısa değerlendirmeyi tamamla.",
-    disclaimer: "Canlandırma: Cezeri’nin çocukluk odası kaynaklarda belgelenmemiştir, tahmine dayalı bir yeniden kurgudur.",
+    title: "Bilim İnsanının Çocukluğu",
+    introMission: "Merhaba sevgili öğrenciler! Bu etkinlikte bir bilim insanının çocukluğuna yolculuk yapacağız. Odanın dört duvarını gezerek merak ettiğiniz nesnelerin numaralarına tıklayıp açıklamalarını okuyunuz.",
+    disclaimer: "Canlandırma: Bir bilim insanının çocukluk odası ve aletleri, dönemin bilimsel mirasına dayalı bir canlandırmadır.",
 
-    totalObjectCount: 9,
+    totalObjectCount: 10,
 
-    // 4 Duvar (assets/img/duvar1.webp ... duvar4.webp konulduğunda otomatik yüklenir)
+    // 4 Duvar
     walls: [
       {
         id: "duvar1",
         order: 1,
-        name: "1. Duvar: Çalışma Köşesi",
-        shortName: "Çalışma Köşesi",
+        name: "1. Duvar: Çalışma Masası",
+        shortName: "Çalışma Masası",
         image: "assets/img/duvar1.webp",
-        ariaLabel: "1. Duvar: Çalışma Köşesi. Cezeri’nin yazı ve çizim araçlarının bulunduğu çalışma alanı.",
-        placeholder: {
-          bgGradient: "linear-gradient(155deg, #3b281c 0%, #5b3d28 52%, #291b12 100%)",
-          accentColor: "#e4a93c",
-          subtitle: "Yer Tutucu Görsel • assets/img/duvar1.webp",
-          description: "Çalışma köşesi: ahşap rahle, kamış kalem ve mürekkeplik"
-        }
+        ariaLabel: "1. Duvar: Çalışma Masası. Yazı ve teknik çizim araçlarının bulunduğu çalışma alanı."
       },
       {
         id: "duvar2",
         order: 2,
-        name: "2. Duvar: Mekanik Raf",
-        shortName: "Mekanik Raf",
+        name: "2. Duvar: Gözlem ve Astronomi Rafı",
+        shortName: "Astronomi Rafı",
         image: "assets/img/duvar2.webp",
-        ariaLabel: "2. Duvar: Mekanik Raf. Küçük düzeneklerin ve modellerin sergilendiği raf bölümü.",
-        placeholder: {
-          bgGradient: "linear-gradient(155deg, #24343b 0%, #3a525c 52%, #192328 100%)",
-          accentColor: "#78c0a8",
-          subtitle: "Yer Tutucu Görsel • assets/img/duvar2.webp",
-          description: "Mekanik raf: mekanik kuş maketi ve hareketli kukla"
-        }
+        ariaLabel: "2. Duvar: Gözlem ve Astronomi Rafı. Gökyüzü gözlem araçları ve astronomi çizimlerinin bulunduğu bölüm."
       },
       {
         id: "duvar3",
         order: 3,
-        name: "3. Duvar: Oyma Atölyesi",
-        shortName: "Oyma Atölyesi",
+        name: "3. Duvar: Mekanik Atölyesi",
+        shortName: "Mekanik Atölyesi",
         image: "assets/img/duvar3.webp",
-        ariaLabel: "3. Duvar: Oyma Atölyesi. Ahşap yontma araçları ve taslak sayfaların bulunduğu tezgah.",
-        placeholder: {
-          bgGradient: "linear-gradient(155deg, #36252b 0%, #543741 52%, #23171b 100%)",
-          accentColor: "#e09f7d",
-          subtitle: "Yer Tutucu Görsel • assets/img/duvar3.webp",
-          description: "Oyma atölyesi: ahşap oyma takımı ve yazılı taslak sayfalar"
-        }
+        ariaLabel: "3. Duvar: Mekanik Atölyesi. Ahşap su çarkı ve dişli düzeneklerinin geliştirildiği atölye masası."
       },
       {
         id: "duvar4",
         order: 4,
-        name: "4. Duvar: Pencere ve Yer Yatağı",
-        shortName: "Pencere ve Yer Yatağı",
+        name: "4. Duvar: Kütüphane ve Pencere",
+        shortName: "Kütüphane ve Pencere",
         image: "assets/img/duvar4.webp",
-        ariaLabel: "4. Duvar: Pencere ve Yer Yatağı. Küçük pencere ve akşam okumaları için mumun yer aldığı bölüm.",
-        placeholder: {
-          bgGradient: "linear-gradient(155deg, #22293a 0%, #34415c 52%, #151a26 100%)",
-          accentColor: "#9dc4f0",
-          subtitle: "Yer Tutucu Görsel • assets/img/duvar4.webp",
-          description: "Pencere ve yer yatağı: küçük taş pencere ve mum"
-        }
+        ariaLabel: "4. Duvar: Kütüphane ve Pencere. Ciltli kitaplar, parşömen tomarları ve gece Dicle nehri manzarası."
       }
     ],
 
-    // 9 Nesne: rahle, kamış kalem, mürekkeplik, mekanik kuş, kukla, oyma takımı, yazılı sayfalar, küçük pencere, mum
+    // 10 Nesne (Word belgesindeki kelimesi kelimesine açıklamalar)
     objects: [
       {
-        id: "rahle",
-        wallId: "duvar1",
-        name: "Rahle",
-        x: 34.0,
-        y: 66.0,
-        image: "assets/img/nesne-rahle.webp",
-        imagePlaceholderLabel: "Ahşap Rahle",
-        ariaLabel: "Rahle nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] 12. yüzyılda kitap okumak, el yazmalarını incelemek ve çizim yapmak için kullanılan açılır kapanır ahşap yazı ve okuma sehpasıydı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Günümüzde kullandığımız eğimli çalışma masaları, kitap tutucular ve tablet/dizüstü bilgisayar stantları aynı ergonomi ihtiyacını karşılar."
-          }
-        }
-      },
-      {
         id: "kamis-kalem",
+        order: 1,
         wallId: "duvar1",
         name: "Kamış Kalem",
-        x: 52.0,
-        y: 57.5,
+        x: 46.7,
+        y: 62.5,
         image: "assets/img/nesne-kamis-kalem.webp",
         imagePlaceholderLabel: "Kamış Kalem",
         ariaLabel: "Kamış Kalem nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] Kurutulmuş kamışın ucunun eğik yontulmasıyla hazırlanan bu kalem, hem hat yazılarında hem de mekanik tasarım taslaklarının çiziminde kullanılırdı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Bugün yerini dolma kalemlere, teknik çizim kalemlerine (rapido) ve dijital çizim kalemlerine (stylus) bırakmıştır."
-          }
-        }
+        description: "Kurşun kalem ve tükenmez kalemin bulunmadığı dönemlerde ucu mürekkep hokkasına batırılarak yazı ve teknik çizim yapmak için kullanılırdı."
       },
       {
-        id: "murekkeplik",
+        id: "murekkep-hokkasi",
+        order: 2,
         wallId: "duvar1",
-        name: "Mürekkeplik (Hokka)",
-        x: 65.5,
-        y: 64.0,
+        name: "Mürekkep Hokkası",
+        x: 38.5,
+        y: 72.6,
         image: "assets/img/nesne-murekkeplik.webp",
-        imagePlaceholderLabel: "Mürekkeplik",
-        ariaLabel: "Mürekkeplik nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] İçinde doğal is ve zamktan üretilen mürekkebin tutulduğu, taşmayı önlemek için içine ham ipek (lika) yerleştirilen küçük kaptı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Günümüzdeki kalem kartuşları, yazıcı mürekkep tankları ve dijital çizim yazılımlarındaki renk paletleri aynı işlevi sürdürür."
-          }
-        }
+        imagePlaceholderLabel: "Mürekkep Hokkası",
+        ariaLabel: "Mürekkep Hokkası nesnesini incele",
+        description: "Tükenmez kalemler yokken kamış kalemin ucunu mürekkebe batırarak parşömene yazı yazmak ve teknik çizim yapmak için kullanılırdı."
       },
       {
-        id: "mekanik-kus",
+        id: "parsemen",
+        order: 3,
+        wallId: "duvar1",
+        name: "Parşömen",
+        x: 43.0,
+        y: 70.0,
+        image: "assets/img/nesne-parsemen.webp",
+        imagePlaceholderLabel: "Parşömen",
+        ariaLabel: "Parşömen nesnesini incele",
+        description: "Matbaa ve defterler henüz yokken planlar, gözlemler ve ders notları parşömen üzerine yazılırdı."
+      },
+      {
+        id: "yag-kandili",
+        order: 4,
+        wallId: "duvar1",
+        name: "Yağ Kandili",
+        x: 40.3,
+        y: 60.9,
+        image: "assets/img/nesne-yag-kandili.webp",
+        imagePlaceholderLabel: "Yağ Kandili",
+        ariaLabel: "Yağ Kandili nesnesini incele",
+        description: "Elektrik ve gaz lambası olmadığı dönemlerde aydınlatma amacıyla kullanırdı."
+      },
+      {
+        id: "pirinc-usturlap",
+        order: 5,
         wallId: "duvar2",
-        name: "Mekanik Kuş",
-        x: 38.0,
-        y: 42.0,
-        image: "assets/img/nesne-mekanik-kus.webp",
-        imagePlaceholderLabel: "Mekanik Kuş",
-        ariaLabel: "Mekanik Kuş nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] Su basıncı, hava veya küçük dişlilerle kanat çırpan ya da ses çıkaran basit otomat modelleri; hareket ilkelerini gözlemlemek için yapılırdı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Günümüzün programlanabilir robotik kitleri, servo motorlu maketleri ve otomatik ses/hareket sensörlü oyuncakları bu geleneğin devamıdır."
-          }
-        }
+        name: "Pirinç Usturlap",
+        x: 28.7,
+        y: 52.7,
+        image: "assets/img/nesne-usturlap.webp",
+        imagePlaceholderLabel: "Pirinç Usturlap",
+        ariaLabel: "Pirinç Usturlap nesnesini incele",
+        description: "Teleskop, uydu ve bilgisayar yokken güneş ve yıldızların konumunu ölçerek yön ve saat hesaplamakta kullanılırdı."
       },
       {
-        id: "kukla",
+        id: "halkali-gok-kuresi",
+        order: 6,
         wallId: "duvar2",
-        name: "Kukla",
-        x: 64.0,
-        y: 48.0,
-        image: "assets/img/nesne-kukla.webp",
-        imagePlaceholderLabel: "Eklemli Kukla",
-        ariaLabel: "Kukla nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] İplerle veya ahşap mafsallarla hareket ettirilen kuklalar, hem oyun aracıydı hem de insan ve hayvan eklemlerinin mekanik hareketini anlamaya yardımcı olurdu."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Bugün eklemli robot kolları, animasyon karakter iskeletleri (rigging) ve hareket yakalama modelleri aynı kinematik mantığı kullanır."
-          }
-        }
+        name: "Halkalı Gök Küresi",
+        x: 44.0,
+        y: 56.6,
+        image: "assets/img/nesne-gok-kuresi.webp",
+        imagePlaceholderLabel: "Halkalı Gök Küresi",
+        ariaLabel: "Halkalı Gök Küresi nesnesini incele",
+        description: "Bilgisayar simülasyonları yokken gök cisimlerinin hareketini üç boyutlu olarak inceleyip hesaplamak için kullanılırdı."
       },
       {
-        id: "oyma-takimi",
+        id: "parsemen-tomari",
+        order: 7,
+        wallId: "duvar2",
+        name: "Parşömen Tomarları",
+        x: 62.1,
+        y: 65.1,
+        image: "assets/img/nesne-tomar.webp",
+        imagePlaceholderLabel: "Parşömen Tomarları",
+        ariaLabel: "Parşömen Tomarları nesnesini incele",
+        description: "Matbaa ve genel ağ olmadığı dönemlerde el yazması çizim ve astronomi bilgilerini koruyup aktarmak için kullanılırdı."
+      },
+      {
+        id: "ahsap-su-carki",
+        order: 8,
         wallId: "duvar3",
-        name: "Oyma Takımı",
-        x: 42.0,
-        y: 62.0,
-        image: "assets/img/nesne-oyma-takimi.webp",
-        imagePlaceholderLabel: "Oyma Takımı",
-        ariaLabel: "Oyma Takımı nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] Farklı ağız genişliklerindeki iskarpela ve bıçaklardan oluşan bu takım, ahşaptan dişli çarklar, kaldıraçlar ve kapaklar şekillendirmek için kullanılırdı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Günümüzde hassas parça üretiminde kullanılan CNC frezeler, lazer kesiciler ve 3B yazıcılar benzer şekillendirme görevini üstlenir."
-          }
-        }
+        name: "Ahşap Su Çarkı ve Dişliler",
+        x: 50.0,
+        y: 52.7,
+        image: "assets/img/nesne-su-carki.webp",
+        imagePlaceholderLabel: "Ahşap Su Çarkı ve Dişliler",
+        ariaLabel: "Ahşap Su Çarkı ve Dişliler nesnesini incele",
+        description: "Elektrik motorunun olmadığı dönemde akan suyun gücüyle dönme hareketi üretip su pompalarını çalıştırmayı denemek için yapılırdı."
       },
       {
-        id: "yazili-sayfalar",
+        id: "gaz-lambasi",
+        order: 9,
         wallId: "duvar3",
-        name: "Yazılı Sayfalar",
-        x: 66.0,
-        y: 54.0,
-        image: "assets/img/nesne-yazili-sayfalar.webp",
-        imagePlaceholderLabel: "Yazılı Sayfalar",
-        ariaLabel: "Yazılı Sayfalar nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] El yapımı kağıtlar üzerine alınan notlar, geometrik şekiller ve düzenek taslakları; fikirlerin denenip sonraki kuşaklara aktarılmasını sağlardı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Günümüzde mühendislik defterleri, CAD teknik çizim dosyaları ve dijital not uygulamaları tasarım belleğini oluşturur."
-          }
-        }
+        name: "Gaz Lambası",
+        x: 50.0,
+        y: 24.4,
+        image: "assets/img/nesne-gaz-lambasi.webp",
+        imagePlaceholderLabel: "Gaz Lambası",
+        ariaLabel: "Gaz Lambası nesnesini incele",
+        description: "Eskiden evlerde elektrik ve ampul olmadığı için odayı ve masayı aydınlatmak için kullanılırdı."
       },
       {
-        id: "kucuk-pencere",
+        id: "basili-kitaplar",
+        order: 10,
         wallId: "duvar4",
-        name: "Küçük Pencere",
-        x: 40.0,
-        y: 34.0,
-        image: "assets/img/nesne-kucuk-pencere.webp",
-        imagePlaceholderLabel: "Küçük Pencere",
-        ariaLabel: "Küçük Pencere nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] Taş duvarlara açılan küçük pencere gündüz doğal ışık ve hava sirkülasyonu sağlarken, güneş ışığının açısı zamanı takip etmeye de yarardı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Modern binalardaki ısı yalıtımlı pencereler, doğal aydınlatma sistemleri ve akıllı havalandırma menfezleri aynı amaçla tasarlanır."
-          }
-        }
-      },
-      {
-        id: "mum",
-        wallId: "duvar4",
-        name: "Mum",
-        x: 64.0,
-        y: 65.0,
-        image: "assets/img/nesne-mum.webp",
-        imagePlaceholderLabel: "Mum",
-        ariaLabel: "Mum nesnesini incele",
-        tabs: {
-          donem: {
-            heading: "O zaman ne işe yarardı?",
-            text: "[Yer tutucu içerik] Balmumu veya içyağından yapılan mumlar akşam karanlığında çalışma odasını aydınlatır, aynı zamanda sabit yanma hızıyla basit zaman ölçümünde de kullanılırdı."
-          },
-          bugun: {
-            heading: "Günümüz karşılığı",
-            text: "[Yer tutucu içerik] Günümüzde LED masa lambaları aydınlatma görevini, dijital saat ve zamanlayıcılar ise zaman ölçümünü üstlenir."
-          }
-        }
-      }
-    ],
-
-    // Eşleştirme etkinliği çiftleri (eski alet <-> günümüz karşılığı)
-    matchingPairs: [
-      {
-        id: "rahle",
-        oldLabel: "Rahle",
-        modernLabel: "Kitap tutucu ve tablet standı"
-      },
-      {
-        id: "kamis-kalem",
-        oldLabel: "Kamış Kalem",
-        modernLabel: "Teknik çizim ve dijital kalem"
-      },
-      {
-        id: "mekanik-kus",
-        oldLabel: "Mekanik Kuş",
-        modernLabel: "Programlanabilir robotik maket"
-      },
-      {
-        id: "oyma-takimi",
-        oldLabel: "Oyma Takımı",
-        modernLabel: "CNC kesici ve 3B yazıcı"
-      },
-      {
-        id: "mum",
-        oldLabel: "Mum",
-        modernLabel: "LED çalışma lambası"
-      }
-    ],
-
-    // Kapanış değerlendirmesi (yer tutucu 3 çoktan seçmeli soru)
-    quizQuestions: [
-      {
-        id: "q1",
-        question: "[Yer tutucu soru 1] Cezeri’nin çalışma köşesindeki rahle, kamış kalem ve yazılı sayfalar birlikte hangi becerinin önemini gösterir?",
-        options: [
-          "Tasarım yapmadan önce planlama, çizim ve kayıt tutmanın",
-          "Yalnızca sözel ezbere dayalı çalışmanın",
-          "Araçları hiç değiştirmeden kullanmanın",
-          "Sadece gece saatlerinde çalışmanın"
-        ],
-        correctIndex: 0,
-        explanation: "Mekanik düzenekler geliştirilmeden önce taslak çizmek ve gözlemleri yazılı olarak kaydetmek tasarım sürecinin temelidir."
-      },
-      {
-        id: "q2",
-        question: "[Yer tutucu soru 2] Eklemli kukla ve mekanik kuş gibi modeller, bugünkü hangi mühendislik alanının erken örnekleri sayılabilir?",
-        options: [
-          "Tarım sulama kanallarının",
-          "Otomasyon ve robotik sistemlerin",
-          "Tekstil dokumacılığının",
-          "Kimyasal gübre üretiminin"
-        ],
-        correctIndex: 1,
-        explanation: "Kendi kendine veya mekanik bağlantılarla hareket eden düzenekler, modern otomasyon ve robotiğin öncüleri arasında yer alır."
-      },
-      {
-        id: "q3",
-        question: "[Yer tutucu soru 3] Bu etkinlikte incelediğimiz oda hakkında aşağıdakilerden hangisi doğrudur?",
-        options: [
-          "Cezeri’nin çocukluk odasının birebir fotoğrafından kopyalanmıştır",
-          "Cezeri’nin tüm eserleri yalnızca bu odada sergilenmektedir",
-          "Kaynaklarda belgelenmediği için dönemin araçlarına dayalı tahmini bir canlandırmadır",
-          "20. yüzyılda yapılmış modern bir müze odasıdır"
-        ],
-        correctIndex: 2,
-        explanation: "Cezeri’nin çocukluk odası tarihsel kaynaklarda ayrıntılı biçimde belgelenmemiştir; sahne dönemin araçları üzerinden kurgulanmıştır."
+        name: "Basılı Kitaplar",
+        x: 70.9,
+        y: 58.6,
+        image: "assets/img/nesne-kitaplar.webp",
+        imagePlaceholderLabel: "Basılı Kitaplar",
+        ariaLabel: "Basılı Kitaplar nesnesini incele",
+        description: "Genel ağ ve dijital kütüphaneler henüz bulunmadığı için bilgiye öğretmenler ve bu sınırlı basılı kitaplardan ulaşılırdı."
       }
     ]
   };
