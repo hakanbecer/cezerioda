@@ -2,16 +2,16 @@
   "giris": {
     "baslik": "Bilim İnsanının Çocukluğu",
     "metin": "Merhaba sevgili öğrenciler! Bu etkinlikte bir bilim insanının çocukluğuna yolculuk yapacağız. Önce çocuğun odasını dikkatle inceleyeceksiniz. Sonra ikinci resimde merak ettiğiniz nesnelerin numaralarına tıklayıp açıklamalarını okuyacaksınız. Hazırsanız Etkinliğe Başla düğmesine tıklayınız.",
-    "audio": "audio/giris.mp3"
+    "audio": "audio/giris.wav"
   },
   "ekran1": {
     "yonerge": "Bu resimde bir bilim insanının çocukluğunu görüyorsunuz. Odasını dikkatle inceleyiniz. Hazır olduğunuzda Devam düğmesine tıklayınız.",
-    "audio": "audio/ekran1.mp3",
+    "audio": "audio/ekran1.wav",
     "gorsel": "assets/img/oda1.png"
   },
   "ekran2": {
     "yonerge": "Şimdi aynı odayı numaralarla birlikte görüyorsunuz. Merak ettiğiniz kısımlardaki numaralara tıklayarak açıklamaları okuyunuz.",
-    "audio": "audio/ekran2.mp3",
+    "audio": "audio/ekran2.wav",
     "gorsel": "assets/img/oda2.png",
     "tebrik": "Tebrikler! Odadaki 10 nesnenin tamamını ve açıklamalarını başarıyla incelediniz.",
     "nesneler": [

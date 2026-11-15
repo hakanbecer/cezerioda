@@ -13,17 +13,17 @@
     var M = global.METINLER || {};
     if (key === "giris") {
       return {
-        url: (M.giris && M.giris.audio) || "audio/giris.mp3",
+        url: (M.giris && M.giris.audio) || "audio/giris.wav",
         text: (M.giris && M.giris.metin) || ""
       };
     } else if (key === "ekran1") {
       return {
-        url: (M.ekran1 && M.ekran1.audio) || "audio/ekran1.mp3",
+        url: (M.ekran1 && M.ekran1.audio) || "audio/ekran1.wav",
         text: (M.ekran1 && M.ekran1.yonerge) || ""
       };
     } else if (key === "ekran2") {
       return {
-        url: (M.ekran2 && M.ekran2.audio) || "audio/ekran2.mp3",
+        url: (M.ekran2 && M.ekran2.audio) || "audio/ekran2.wav",
         text: (M.ekran2 && M.ekran2.yonerge) || ""
       };
     }

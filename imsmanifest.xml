@@ -33,6 +33,9 @@
       <file href="audio/giris.mp3"/>
       <file href="audio/ekran1.mp3"/>
       <file href="audio/ekran2.mp3"/>
+      <file href="audio/giris.wav"/>
+      <file href="audio/ekran1.wav"/>
+      <file href="audio/ekran2.wav"/>
       <file href="assets/img/oda1.png"/>
       <file href="assets/img/oda2.png"/>
     </resource>
