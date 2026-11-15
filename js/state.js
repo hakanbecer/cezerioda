@@ -4,14 +4,9 @@
   var Cezeri = global.Cezeri = global.Cezeri || {};
 
   var state = {
-    started: false,
-    currentWallIndex: 0,
-    foundIds: [],
-    activityDone: false,
-    quizDone: false,
-    quizCorrectCount: 0,
-    quizTotalCount: 0,
-    score: 0
+    currentScreen: 0, // 0: Giriş, 1: Ekran 1, 2: Ekran 2
+    visitedIds: [],
+    completed: false
   };
 
   var listeners = [];
@@ -27,20 +22,9 @@
   }
 
   function getTotalCount() {
-    var data = Cezeri.data || {};
-    if (typeof data.totalObjectCount === "number" && data.totalObjectCount > 0) {
-      return data.totalObjectCount;
-    }
-    return (data.objects && data.objects.length) || 0;
-  }
-
-  function getValidObjectMap() {
-    var map = {};
-    var objects = (Cezeri.data && Cezeri.data.objects) || [];
-    for (var i = 0; i < objects.length; i += 1) {
-      map[objects[i].id] = true;
-    }
-    return map;
+    var M = global.METINLER || {};
+    var list = (M.ekran2 && M.ekran2.nesneler) || [];
+    return list.length || 10;
   }
 
   function persist() {
@@ -48,13 +32,9 @@
       return;
     }
     Cezeri.scorm.saveSuspendData({
-      f: state.foundIds,
-      w: state.currentWallIndex,
-      a: state.activityDone ? 1 : 0,
-      q: state.quizDone ? 1 : 0,
-      c: state.quizCorrectCount,
-      t: state.quizTotalCount,
-      s: state.score
+      s: state.currentScreen,
+      v: state.visitedIds,
+      c: state.completed ? 1 : 0
     });
   }
 
@@ -67,136 +47,74 @@
       return;
     }
 
-    var validObjects = getValidObjectMap();
-    if (Array.isArray(saved.f)) {
-      var restored = [];
-      for (var i = 0; i < saved.f.length; i += 1) {
-        var id = saved.f[i];
-        if (validObjects[id] && restored.indexOf(id) === -1) {
-          restored.push(id);
-        }
-      }
-      state.foundIds = restored;
+    if (Array.isArray(saved.v)) {
+      state.visitedIds = saved.v;
     }
-
-    var wallCount = (Cezeri.data && Cezeri.data.walls && Cezeri.data.walls.length) || 1;
-    if (typeof saved.w === "number" && saved.w >= 0 && saved.w < wallCount) {
-      state.currentWallIndex = Math.floor(saved.w);
+    if (typeof saved.s === "number" && saved.s >= 0 && saved.s <= 2) {
+      state.currentScreen = saved.s;
     }
-
-    state.activityDone = Boolean(saved.a);
-    state.quizDone = Boolean(saved.q);
-    if (typeof saved.c === "number") {
-      state.quizCorrectCount = Math.max(0, Math.floor(saved.c));
+    if (saved.c) {
+      state.completed = true;
     }
-    if (typeof saved.t === "number") {
-      state.quizTotalCount = Math.max(0, Math.floor(saved.t));
-    }
-    if (typeof saved.s === "number") {
-      state.score = saved.s;
-    }
-
     notify("restored");
   }
 
-  function setStarted(val) {
-    state.started = Boolean(val);
-    notify("started");
-  }
-
-  function setWallIndex(index) {
-    var walls = (Cezeri.data && Cezeri.data.walls) || [];
-    if (!walls.length) {
-      return;
-    }
-    var normalized = ((index % walls.length) + walls.length) % walls.length;
-    if (normalized === state.currentWallIndex) {
-      return;
-    }
-    state.currentWallIndex = normalized;
+  function setScreen(screenIndex) {
+    state.currentScreen = screenIndex;
     persist();
-    notify("wallChanged", { wallIndex: normalized });
+    notify("screenChange", { screen: screenIndex });
   }
 
-  function isFound(objectId) {
-    return state.foundIds.indexOf(objectId) !== -1;
-  }
+  function markVisited(id) {
+    var numId = Number(id);
+    if (state.visitedIds.indexOf(numId) === -1) {
+      state.visitedIds.push(numId);
 
-  function markFound(objectId) {
-    if (isFound(objectId)) {
-      return false;
+      var total = getTotalCount();
+      if (state.visitedIds.length >= total && !state.completed) {
+        state.completed = true;
+        if (Cezeri.scorm) {
+          Cezeri.scorm.setScore(100);
+          Cezeri.scorm.setLessonStatus("completed");
+          Cezeri.scorm.commit();
+        }
+        notify("allCompleted");
+      }
+
+      persist();
+      notify("objectVisited", { id: numId });
     }
-    state.foundIds.push(objectId);
-    persist();
-    notify("objectFound", { objectId: objectId });
-    return true;
   }
 
-  function completeActivity() {
-    state.activityDone = true;
-    persist();
-    checkAndCompleteScorm();
-    notify("activityCompleted");
+  function isVisited(id) {
+    return state.visitedIds.indexOf(Number(id)) !== -1;
   }
 
-  function completeQuiz(correctCount, totalCount) {
-    var total = Math.max(1, Number(totalCount) || 1);
-    var correct = Math.max(0, Math.min(total, Number(correctCount) || 0));
-    state.quizDone = true;
-    state.quizCorrectCount = correct;
-    state.quizTotalCount = total;
-    state.score = Math.round((correct / total) * 100);
-
-    if (Cezeri.scorm) {
-      Cezeri.scorm.setScore(state.score);
-    }
-    persist();
-    checkAndCompleteScorm();
-    notify("quizCompleted");
+  function getVisitedCount() {
+    return state.visitedIds.length;
   }
 
-  function setScore(newScore) {
-    state.score = Math.max(0, Math.min(100, Math.round(Number(newScore) || 0)));
-    if (Cezeri.scorm) {
-      Cezeri.scorm.setScore(state.score);
-    }
-    persist();
-    notify("scoreChanged");
+  function isAllVisited() {
+    return state.visitedIds.length >= getTotalCount();
   }
 
-  function isEverythingCompleted() {
-    return (
-      state.foundIds.length >= getTotalCount() &&
-      state.activityDone &&
-      state.quizDone
-    );
-  }
-
-  function checkAndCompleteScorm() {
-    if (isEverythingCompleted() && Cezeri.scorm) {
-      Cezeri.scorm.setLessonStatus("completed");
+  function subscribe(fn) {
+    if (typeof fn === "function") {
+      listeners.push(fn);
     }
   }
 
   Cezeri.state = {
-    get: function () { return state; },
-    subscribe: function (fn) {
-      if (typeof fn === "function") {
-        listeners.push(fn);
-      }
+    get: function () {
+      return state;
     },
-    restoreFromScorm: restoreFromScorm,
-    persist: persist,
-    setStarted: setStarted,
-    setWallIndex: setWallIndex,
-    isFound: isFound,
-    markFound: markFound,
-    completeActivity: completeActivity,
-    completeQuiz: completeQuiz,
-    getFoundCount: function () { return state.foundIds.length; },
+    setScreen: setScreen,
+    markVisited: markVisited,
+    isVisited: isVisited,
+    getVisitedCount: getVisitedCount,
     getTotalCount: getTotalCount,
-    setScore: setScore,
-    isEverythingCompleted: isEverythingCompleted,
-    checkAndCompleteScorm: checkAndCompleteScorm
+    isAllVisited: isAllVisited,
+    restoreFromScorm: restoreFromScorm,
+    subscribe: subscribe
   };
 })(window);

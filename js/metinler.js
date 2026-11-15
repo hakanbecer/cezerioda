@@ -1,0 +1,104 @@
+(function (global) {
+  "use strict";
+
+  global.METINLER = {
+    "giris": {
+      "baslik": "Bilim İnsanının Çocukluğu",
+      "metin": "Merhaba sevgili öğrenciler! Bu etkinlikte bir bilim insanının çocukluğuna yolculuk yapacağız. Önce çocuğun odasını dikkatle inceleyeceksiniz. Sonra ikinci resimde merak ettiğiniz nesnelerin numaralarına tıklayıp açıklamalarını okuyacaksınız. Hazırsanız Etkinliğe Başla düğmesine tıklayınız.",
+      "audio": "audio/giris.mp3"
+    },
+    "ekran1": {
+      "yonerge": "Bu resimde bir bilim insanının çocukluğunu görüyorsunuz. Odasını dikkatle inceleyiniz. Hazır olduğunuzda Devam düğmesine tıklayınız.",
+      "audio": "audio/ekran1.mp3",
+      "gorsel": "assets/img/oda1.png"
+    },
+    "ekran2": {
+      "yonerge": "Şimdi aynı odayı numaralarla birlikte görüyorsunuz. Merak ettiğiniz kısımlardaki numaralara tıklayarak açıklamaları okuyunuz.",
+      "audio": "audio/ekran2.mp3",
+      "gorsel": "assets/img/oda2.png",
+      "tebrik": "Tebrikler! Odadaki 10 nesnenin tamamını ve açıklamalarını başarıyla incelediniz.",
+      "nesneler": [
+        {
+          "id": 1,
+          "numara": 1,
+          "baslik": "Ahşap Su Çarkı ve Dişliler",
+          "aciklama": "Elektrik motorunun olmadığı dönemde akan suyun gücüyle dönme hareketi üretip su pompalarını çalıştırmayı denemek için yapılırdı.",
+          "x": 13.8,
+          "y": 63.3
+        },
+        {
+          "id": 2,
+          "numara": 2,
+          "baslik": "Yağ Kandili",
+          "aciklama": "Elektrik ve gaz lambası olmadığı dönemlerde aydınlatma amacıyla kullanırdı.",
+          "x": 31.1,
+          "y": 62.3
+        },
+        {
+          "id": 3,
+          "numara": 3,
+          "baslik": "Mürekkep Hokkası",
+          "aciklama": "Tükenmez kalemler yokken kamış kalemin ucunu mürekkebe batırarak parşömene yazı yazmak ve teknik çizim yapmak için kullanılırdı.",
+          "x": 40.1,
+          "y": 84.6
+        },
+        {
+          "id": 4,
+          "numara": 4,
+          "baslik": "Kamış Kalem",
+          "aciklama": "Kurşun kalem ve tükenmez kalemin bulunmadığı dönemlerde ucu mürekkep hokkasına batırılarak yazı ve teknik çizim yapmak için kullanılırdı.",
+          "x": 47.7,
+          "y": 61.2
+        },
+        {
+          "id": 5,
+          "numara": 5,
+          "baslik": "Parşömen",
+          "aciklama": "Matbaa ve defterler henüz yokken planlar, gözlemler ve ders notları parşömen üzerine yazılırdı.",
+          "x": 55.4,
+          "y": 88.2
+        },
+        {
+          "id": 6,
+          "numara": 6,
+          "baslik": "Pirinç Usturlap",
+          "aciklama": "Teleskop, uydu ve bilgisayar yokken güneş ve yıldızların konumunu ölçerek yön ve saat hesaplamakta kullanılırdı.",
+          "x": 43.0,
+          "y": 34.1
+        },
+        {
+          "id": 7,
+          "numara": 7,
+          "baslik": "Halkalı Gök Küresi",
+          "aciklama": "Bilgisayar simülasyonları yokken gök cisimlerinin hareketini üç boyutlu olarak inceleyip hesaplamak için kullanılırdı.",
+          "x": 70.0,
+          "y": 36.2
+        },
+        {
+          "id": 8,
+          "numara": 8,
+          "baslik": "Parşömen Tomarları",
+          "aciklama": "Matbaa ve genel ağ olmadığı dönemlerde el yazması çizim ve astronomi bilgilerini koruyup aktarmak için kullanılırdı.",
+          "x": 85.5,
+          "y": 50.5
+        },
+        {
+          "id": 9,
+          "numara": 9,
+          "baslik": "Gaz Lambası",
+          "aciklama": "Eskiden evlerde elektrik ve ampul olmadığı için odayı ve masayı aydınlatmak için kullanılırdı.",
+          "x": 93.3,
+          "y": 74.9
+        },
+        {
+          "id": 10,
+          "numara": 10,
+          "baslik": "Basılı Kitaplar",
+          "aciklama": "Genel ağ ve dijital kütüphaneler henüz bulunmadığı için bilgiye öğretmenler ve bu sınırlı basılı kitaplardan ulaşılırdı.",
+          "x": 72.0,
+          "y": 83.6
+        }
+      ]
+    }
+  };
+})(window);

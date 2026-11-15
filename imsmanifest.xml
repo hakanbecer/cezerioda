@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest identifier="cezeri_cocukluk_odasi_scorm12" version="1.0"
+<manifest identifier="bilim_insaninin_cocuklugu_scorm12" version="1.0"
   xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
   xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,32 +10,31 @@
     <schema>ADL SCORM</schema>
     <schemaversion>1.2</schemaversion>
   </metadata>
-  <organizations default="cezeri_org">
-    <organization identifier="cezeri_org">
-      <title>Cezeri’nin Çocukluk Odası</title>
-      <item identifier="item_cezeri_oda" identifierref="res_cezeri_oda" isvisible="true">
-        <title>Cezeri’nin Çocukluk Odası</title>
+  <organizations default="bilim_insani_org">
+    <organization identifier="bilim_insani_org">
+      <title>Bilim İnsanının Çocukluğu</title>
+      <item identifier="item_bilim_insani_oda" identifierref="res_bilim_insani_oda" isvisible="true">
+        <title>Bilim İnsanının Çocukluğu</title>
       </item>
     </organization>
   </organizations>
   <resources>
-    <resource identifier="res_cezeri_oda" type="webcontent" adlcp:scormtype="sco" href="index.html">
+    <resource identifier="res_bilim_insani_oda" type="webcontent" adlcp:scormtype="sco" href="index.html">
       <file href="index.html"/>
       <file href="css/style.css"/>
-      <file href="js/data.js"/>
+      <file href="metinler.json"/>
+      <file href="js/metinler.js"/>
       <file href="js/scorm.js"/>
       <file href="js/state.js"/>
+      <file href="js/audio.js"/>
+      <file href="js/modal.js"/>
       <file href="js/hotspots.js"/>
-      <file href="js/card.js"/>
-      <file href="js/scene.js"/>
-      <file href="js/activity.js"/>
-      <file href="js/quiz.js"/>
-      <file href="js/editor.js"/>
       <file href="js/main.js"/>
-      <file href="assets/img/duvar1.webp"/>
-      <file href="assets/img/duvar2.webp"/>
-      <file href="assets/img/duvar3.webp"/>
-      <file href="assets/img/duvar4.webp"/>
+      <file href="audio/giris.mp3"/>
+      <file href="audio/ekran1.mp3"/>
+      <file href="audio/ekran2.mp3"/>
+      <file href="assets/img/oda1.png"/>
+      <file href="assets/img/oda2.png"/>
     </resource>
   </resources>
 </manifest>
