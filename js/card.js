@@ -63,14 +63,15 @@
     updateThumbnail(obj);
     renderCardContent();
 
-    if (Cezeri.audio && audioBtn) {
-      Cezeri.audio.resetButton(audioBtn);
-    }
-
     overlayEl.hidden = false;
     overlayEl.setAttribute("aria-hidden", "false");
     if (closeBtn) {
       closeBtn.focus();
+    }
+
+    if (Cezeri.audio) {
+      var audioSrc = "audio/nesne_" + obj.order + ".wav";
+      Cezeri.audio.play(audioSrc, audioBtn);
     }
   }
 
